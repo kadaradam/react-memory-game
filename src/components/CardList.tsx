@@ -1,19 +1,16 @@
-import { Box, Container, Typography } from '@mui/material';
+import { Box } from '@mui/material';
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import CardList from './components/CardList';
-import { StartButton } from './components/StartButton';
-import { AppDispatch } from './store';
+import { CardItem } from '../components/CardItem';
+import { AppDispatch } from '../store';
 import {
 	checkMatch,
 	preCheck,
 	selectCards,
-	selectCountOfMoves,
 	selectFlippedCardIds,
-} from './store/slices/memory-game';
+} from '../store/slices/memory-game';
 
-function App() {
-	const countOfMoves = useSelector(selectCountOfMoves);
+export const CardList = () => {
 	const gameCards = useSelector(selectCards);
 	const flippedCardIds = useSelector(selectFlippedCardIds);
 
@@ -36,14 +33,17 @@ function App() {
 	}, [dispatch, flippedCardIds.length]);
 
 	return (
-		<Container component="main">
-			<Box>
-				<Typography variant="body1">Moves: {countOfMoves}</Typography>
-			</Box>
-			<StartButton />
-			<CardList />
-		</Container>
+		<Box
+			display="flex"
+			flexDirection="row"
+			flexWrap="wrap"
+			justifyContent="center"
+		>
+			{gameCards.map((card) => (
+				<CardItem key={card.id} item={card} />
+			))}
+		</Box>
 	);
-}
+};
 
-export default App;
+export default CardList;
