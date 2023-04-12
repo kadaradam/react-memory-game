@@ -97,8 +97,13 @@ const memoryGameSlice = createSlice({
 			const firstCard = state.cards.find((card) => card.id === firstId);
 			const secondCard = state.cards.find((card) => card.id === secondId);
 
-			if (firstCard?.imgUrl === secondCard?.imgUrl) {
-				state.foundCardIds.push(firstId, secondId);
+			if (!firstCard || !secondCard) {
+				return;
+			}
+
+			if (firstCard.imgUrl === secondCard.imgUrl) {
+				console.log('match');
+				state.foundCardIds = [...state.foundCardIds, firstId, secondId];
 			}
 
 			state.flippedCardIds = [];
@@ -124,5 +129,11 @@ export const selectIsCardActive = (cardId: string) => (state: RootState) =>
 
 export const selectIsClickDisabled = (state: RootState) =>
 	state.memoryGame.isCheckRunning;
+
+export const selectCountOfPairs = (state: RootState) =>
+	state.memoryGame.cards.length / 2;
+
+export const selectCountOfMatchedPairs = (state: RootState) =>
+	state.memoryGame.foundCardIds.length / 2;
 
 export default memoryGameSlice.reducer;

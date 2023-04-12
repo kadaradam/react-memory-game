@@ -45,5 +45,3 @@ export const CardList = () => {
 		</Box>
 	);
 };
-
-export default CardList;

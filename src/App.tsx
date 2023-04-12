@@ -1,20 +1,24 @@
-import { Box, Container, Typography } from '@mui/material';
+import {
+	Box,
+	Container,
+	Divider,
+	Paper,
+	Typography,
+	styled,
+} from '@mui/material';
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import CardList from './components/CardList';
-import { StartButton } from './components/StartButton';
+import { CardList } from './components/CardList';
+import { GameActionButtons } from './components/GameActionButtons';
+import { GameStatsBox } from './components/GameStatsBox';
 import { AppDispatch } from './store';
 import {
 	checkMatch,
 	preCheck,
-	selectCards,
-	selectCountOfMoves,
 	selectFlippedCardIds,
 } from './store/slices/memory-game';
 
 function App() {
-	const countOfMoves = useSelector(selectCountOfMoves);
-	const gameCards = useSelector(selectCards);
 	const flippedCardIds = useSelector(selectFlippedCardIds);
 
 	const dispatch = useDispatch<AppDispatch>();
@@ -37,13 +41,24 @@ function App() {
 
 	return (
 		<Container component="main">
-			<Box>
-				<Typography variant="body1">Moves: {countOfMoves}</Typography>
+			<Box display="flex" justifyContent="center">
+				<GamePaper elevation={3}>
+					<Typography variant="h5">Memory game</Typography>
+					<Divider sx={{ my: 2 }} />
+					<GameActionButtons />
+					<GameStatsBox />
+					<CardList />
+				</GamePaper>
 			</Box>
-			<StartButton />
-			<CardList />
 		</Container>
 	);
 }
 
 export default App;
+
+const GamePaper = styled(Paper)(({ theme }) => ({
+	maxWidth: 800,
+	width: '100%',
+	marginTop: theme.spacing(6),
+	padding: theme.spacing(4),
+}));
