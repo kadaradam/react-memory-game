@@ -10,6 +10,7 @@ import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { AppDispatch } from '../store';
 import { selectIsGameWon, startGame } from '../store/slices/memory-game';
+import { Confetti } from './Confetti';
 
 const YouWonDialog = () => {
 	const [open, setOpen] = useState<boolean>(false);
@@ -46,6 +47,7 @@ const YouWonDialog = () => {
 				You won the game! 🎉
 			</DialogTitle>
 			<DialogContent>
+				<Confetti />
 				<DialogContentText id="game-finished-dialog-description">
 					Thanks for playing! Would you like to start a new game?
 				</DialogContentText>
