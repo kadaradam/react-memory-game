@@ -26,13 +26,10 @@ export const CardItem = ({ item }: CardItemProps) => {
 		<GameCard onClick={disabled ? undefined : () => handleFlip()}>
 			<FlipperWrap isCardActive={isCardActive}>
 				<Front>
-					<CardMedia
-						sx={{ height: '100%' }}
-						image={'/default_front_card.webp'}
-					/>
+					<CardImage image={'/default_front_card.webp'} />
 				</Front>
 				<Back>
-					<CardMedia sx={{ height: '100%' }} image={item.imgUrl} />
+					<CardImage image={item.imgUrl} />
 				</Back>
 			</FlipperWrap>
 		</GameCard>
@@ -75,3 +72,8 @@ const Back = styled(CardSideBase)({
 	zIndex: 2,
 	transform: 'rotateY(180deg)',
 });
+
+const CardImage = styled(CardMedia)(({ theme }) => ({
+	height: '100%',
+	borderRadius: theme.spacing(1.5),
+}));
