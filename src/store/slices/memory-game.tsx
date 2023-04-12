@@ -140,6 +140,7 @@ export const selectCountOfMatchedPairs = (state: RootState) =>
 	state.memoryGame.foundCardIds.length / 2;
 
 export const selectIsGameWon = (state: RootState) =>
+	state.memoryGame.isGameRunning &&
 	state.memoryGame.foundCardIds.length === state.memoryGame.cards.length;
 
 export default memoryGameSlice.reducer;
