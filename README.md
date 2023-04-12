@@ -24,7 +24,8 @@ pnpm run build
 
 Architecture:
 
--   PNPM - For the blazingly fast package managing experience 🔥
+-   Node v18 - JS runtime environment
+-   PNPM v8.0 - For the blazingly fast package managing experience 🔥
 -   Vite - For building the frontend application and firing up an ultra fast development server 🔥
 -   React - Frontend framework
 -   Redux - To manage application state across all components
