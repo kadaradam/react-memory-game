@@ -12,6 +12,9 @@ type CardItemProps = {
 	item: CardType;
 };
 
+const CARD_WIDTH = 110;
+const CARD_HEIGHT = 110;
+
 export const CardItem = ({ item }: CardItemProps) => {
 	const dispatch = useDispatch<AppDispatch>();
 
@@ -37,9 +40,9 @@ export const CardItem = ({ item }: CardItemProps) => {
 };
 
 const GameCard = styled(Box)(({ theme }) => ({
-	width: 150,
-	height: 150,
-	margin: theme.spacing(2),
+	width: CARD_WIDTH,
+	height: CARD_HEIGHT,
+	margin: theme.spacing(1),
 	perspective: '1000px',
 	cursor: 'pointer',
 }));
@@ -59,8 +62,8 @@ const CardSideBase = styled(Box)({
 	position: 'absolute',
 	top: 0,
 	left: 0,
-	width: 150,
-	height: 150,
+	width: CARD_WIDTH,
+	height: CARD_HEIGHT,
 });
 
 const Front = styled(CardSideBase)({
