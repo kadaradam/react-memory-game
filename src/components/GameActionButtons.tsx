@@ -1,7 +1,6 @@
 import PlayCircleFilledWhiteIcon from '@mui/icons-material/PlayCircleFilledWhite';
 import RestartAltIcon from '@mui/icons-material/RestartAlt';
-import { Button } from '@mui/material';
-import { Fragment } from 'react';
+import { Box, Button } from '@mui/material';
 import { useDispatch, useSelector } from 'react-redux';
 import { AppDispatch } from '../store';
 
@@ -10,13 +9,14 @@ import {
 	selectIsGameRunning,
 	startGame,
 } from '../store/slices/memory-game';
+import { DeckSizeSelect } from './DeckSizeSelect';
 
 export const GameActionButtons = () => {
 	const isGameRunning = useSelector(selectIsGameRunning);
 	const dispatch = useDispatch<AppDispatch>();
 
 	const handleStartGame = () => {
-		dispatch(startGame({ cardCount: 10 }));
+		dispatch(startGame());
 	};
 
 	const handleResetGame = () => {
@@ -24,7 +24,7 @@ export const GameActionButtons = () => {
 	};
 
 	return (
-		<Fragment>
+		<Box display="flex">
 			<Button
 				onClick={handleStartGame}
 				variant="contained"
@@ -42,6 +42,8 @@ export const GameActionButtons = () => {
 			>
 				Reset game
 			</Button>
-		</Fragment>
+			<Box flexGrow={1} />
+			<DeckSizeSelect />
+		</Box>
 	);
 };

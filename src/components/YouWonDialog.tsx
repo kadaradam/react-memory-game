@@ -26,7 +26,7 @@ const YouWonDialog = () => {
 	};
 
 	const handleStartGame = () => {
-		dispatch(startGame({ cardCount: 1 }));
+		dispatch(startGame());
 		handleClose();
 	};
 

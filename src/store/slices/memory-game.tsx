@@ -11,6 +11,7 @@ type MemoryGameState = {
 	foundCardIds: string[];
 	flippedCardIds: string[];
 	isCheckRunning: boolean;
+	deckSize: number;
 };
 
 const initialState: MemoryGameState = {
@@ -20,19 +21,22 @@ const initialState: MemoryGameState = {
 	foundCardIds: [],
 	flippedCardIds: [],
 	isCheckRunning: false,
+	deckSize: 10,
 };
 
 export const startGame = createAsyncThunk<
 	CatApiItemType[],
-	{ cardCount: number }
->('offers/fetchOffers', async (action, { dispatch }) => {
+	void,
+	{ state: RootState }
+>('offers/fetchOffers', async (action, { getState, dispatch }) => {
+	const state = getState();
+	const { deckSize } = state.memoryGame;
+
 	// Reset previous game
 	dispatch(resetGame());
 
-	const { cardCount } = action;
-
 	const { data } = await axios.get<CatApiItemType[]>(
-		`https://api.thecatapi.com/v1/images/search?limit=${cardCount}`,
+		`https://api.thecatapi.com/v1/images/search?limit=${deckSize}`,
 	);
 
 	return data;
@@ -105,7 +109,6 @@ const memoryGameSlice = createSlice({
 			}
 
 			if (firstCard.imgUrl === secondCard.imgUrl) {
-				console.log('match');
 				state.foundCardIds = [...state.foundCardIds, firstId, secondId];
 			}
 
@@ -113,10 +116,13 @@ const memoryGameSlice = createSlice({
 			state.isCheckRunning = false;
 			state.countOfMoves += 1;
 		},
+		setDeckSize(state, action: PayloadAction<number>) {
+			state.deckSize = action.payload;
+		},
 	},
 });
 
-export const { resetGame, checkMatch, flipCard, preCheck } =
+export const { resetGame, checkMatch, flipCard, preCheck, setDeckSize } =
 	memoryGameSlice.actions;
 export const selectCards = (state: RootState) => state.memoryGame.cards;
 export const selectIsGameRunning = (state: RootState) =>
@@ -142,5 +148,7 @@ export const selectCountOfMatchedPairs = (state: RootState) =>
 export const selectIsGameWon = (state: RootState) =>
 	state.memoryGame.isGameRunning &&
 	state.memoryGame.foundCardIds.length === state.memoryGame.cards.length;
+
+export const selectDeckSize = (state: RootState) => state.memoryGame.deckSize;
 
 export default memoryGameSlice.reducer;
