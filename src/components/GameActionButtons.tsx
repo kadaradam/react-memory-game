@@ -1,7 +1,10 @@
+import PlayCircleFilledWhiteIcon from '@mui/icons-material/PlayCircleFilledWhite';
+import RestartAltIcon from '@mui/icons-material/RestartAlt';
 import { Button } from '@mui/material';
 import { Fragment } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { AppDispatch } from '../store';
+
 import {
 	resetGame,
 	selectIsGameRunning,
@@ -27,6 +30,7 @@ export const GameActionButtons = () => {
 				variant="contained"
 				sx={{ mr: 2 }}
 				disabled={isGameRunning}
+				startIcon={<PlayCircleFilledWhiteIcon />}
 			>
 				Start game
 			</Button>
@@ -34,6 +38,7 @@ export const GameActionButtons = () => {
 				onClick={handleResetGame}
 				variant="outlined"
 				disabled={!isGameRunning}
+				startIcon={<RestartAltIcon />}
 			>
 				Reset game
 			</Button>

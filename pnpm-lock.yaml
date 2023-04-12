@@ -4,6 +4,7 @@ specifiers:
   '@emotion/react': ^11.10.6
   '@emotion/styled': ^11.10.6
   '@fontsource/roboto': ^4.5.8
+  '@mui/icons-material': ^5.11.16
   '@mui/material': ^5.12.0
   '@reduxjs/toolkit': ^1.9.3
   '@types/react': ^18.0.28
@@ -29,6 +30,7 @@ dependencies:
   '@emotion/react': 11.10.6_03af60b1654f8f66a189eb36a8e3da83
   '@emotion/styled': 11.10.6_51cc8c4a19af660654ccb742db229d32
   '@fontsource/roboto': 4.5.8
+  '@mui/icons-material': 5.11.16_61787df4d11bc426ef0c2faa75c6ad88
   '@mui/material': 5.12.0_9414cfa458390c4b2826bb5f1d73e0a2
   '@reduxjs/toolkit': 1.9.3_react-redux@8.0.5+react@18.2.0
   axios: 1.3.5
@@ -694,6 +696,23 @@ packages:
 
   /@mui/core-downloads-tracker/5.12.0:
     resolution: {integrity: sha512-1hoFIdlLI0sG+mkJgm70FjgIVpfLcE1vxPtNolg1tLFXrvbXGUYp9NHy3d6c41nDkg2OajuVS+Mn6A8UirFuMw==}
+    dev: false
+
+  /@mui/icons-material/5.11.16_61787df4d11bc426ef0c2faa75c6ad88:
+    resolution: {integrity: sha512-oKkx9z9Kwg40NtcIajF9uOXhxiyTZrrm9nmIJ4UjkU2IdHpd4QVLbCc/5hZN/y0C6qzi2Zlxyr9TGddQx2vx2A==}
+    engines: {node: '>=12.0.0'}
+    peerDependencies:
+      '@mui/material': ^5.0.0
+      '@types/react': ^17.0.0 || ^18.0.0
+      react: ^17.0.0 || ^18.0.0
+    peerDependenciesMeta:
+      '@types/react':
+        optional: true
+    dependencies:
+      '@babel/runtime': 7.21.0
+      '@mui/material': 5.12.0_9414cfa458390c4b2826bb5f1d73e0a2
+      '@types/react': 18.0.34
+      react: 18.2.0
     dev: false
 
   /@mui/material/5.12.0_9414cfa458390c4b2826bb5f1d73e0a2:
