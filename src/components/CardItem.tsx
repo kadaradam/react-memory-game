@@ -1,4 +1,4 @@
-import { Card, CardMedia } from '@mui/material';
+import { Box, CardMedia, styled } from '@mui/material';
 import { useDispatch, useSelector } from 'react-redux';
 import { AppDispatch } from '../store';
 import {
@@ -23,13 +23,55 @@ export const CardItem = ({ item }: CardItemProps) => {
 	};
 
 	return (
-		<Card
-			sx={{ width: 150, height: 150, m: 2, backgroundColor: 'blue' }}
-			onClick={disabled ? undefined : () => handleFlip()}
-		>
-			{isCardActive ? (
-				<CardMedia sx={{ height: '100%' }} image={item.imgUrl} />
-			) : null}
-		</Card>
+		<GameCard onClick={disabled ? undefined : () => handleFlip()}>
+			<FlipperWrap isCardActive={isCardActive}>
+				<Front>
+					<CardMedia
+						sx={{ height: '100%' }}
+						image={'/default_front_card.webp'}
+					/>
+				</Front>
+				<Back>
+					<CardMedia sx={{ height: '100%' }} image={item.imgUrl} />
+				</Back>
+			</FlipperWrap>
+		</GameCard>
 	);
 };
+
+const GameCard = styled(Box)(({ theme }) => ({
+	width: 150,
+	height: 150,
+	margin: theme.spacing(2),
+	perspective: '1000px',
+	cursor: 'pointer',
+}));
+
+const FlipperWrap = styled(Box, {
+	shouldForwardProp: (prop) =>
+		prop !== 'lowerCase' && prop !== 'isCardActive',
+})<{ isCardActive?: boolean }>(({ isCardActive }) => ({
+	transition: '0.6s',
+	transformStyle: 'preserve-3d',
+	position: 'relative',
+	...(isCardActive && { transform: 'rotateY(180deg)' }),
+}));
+
+const CardSideBase = styled(Box)({
+	backfaceVisibility: 'hidden',
+	position: 'absolute',
+	top: 0,
+	left: 0,
+	width: 150,
+	height: 150,
+});
+
+const Front = styled(CardSideBase)({
+	zIndex: 2,
+	transform: 'rotateY(0deg)',
+});
+
+const Back = styled(CardSideBase)({
+	zIndex: 2,
+	transform: 'rotateY(180deg)',
+});
