@@ -11,6 +11,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { CardList } from './components/CardList';
 import { GameActionButtons } from './components/GameActionButtons';
 import { GameStatsBox } from './components/GameStatsBox';
+import YouWonDialog from './components/YouWonDialog';
 import { AppDispatch } from './store';
 import {
 	checkMatch,
@@ -50,6 +51,7 @@ function App() {
 					<CardList />
 				</GamePaper>
 			</Box>
+			<YouWonDialog />
 		</Container>
 	);
 }

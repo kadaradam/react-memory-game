@@ -25,7 +25,10 @@ const initialState: MemoryGameState = {
 export const startGame = createAsyncThunk<
 	CatApiItemType[],
 	{ cardCount: number }
->('offers/fetchOffers', async (action) => {
+>('offers/fetchOffers', async (action, { dispatch }) => {
+	// Reset previous game
+	dispatch(resetGame());
+
 	const { cardCount } = action;
 
 	const { data } = await axios.get<CatApiItemType[]>(
@@ -135,5 +138,8 @@ export const selectCountOfPairs = (state: RootState) =>
 
 export const selectCountOfMatchedPairs = (state: RootState) =>
 	state.memoryGame.foundCardIds.length / 2;
+
+export const selectIsGameWon = (state: RootState) =>
+	state.memoryGame.foundCardIds.length === state.memoryGame.cards.length;
 
 export default memoryGameSlice.reducer;
